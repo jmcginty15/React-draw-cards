@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import './Deck.css'
@@ -9,7 +9,6 @@ const Deck = () => {
     const [remaining, setRemaining] = useState(52);
     const [drawnCards, setDrawnCards] = useState([]);
     const [drawing, setDrawing] = useState(false);
-    const timerId = useRef(null);
 
     useEffect(() => {
         axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/')
@@ -21,7 +20,7 @@ const Deck = () => {
 
     useEffect(() => {
         if (drawing && remaining) {
-            timerId.current = setTimeout(() => {
+            setTimeout(() => {
                 drawCard();
             }, 1000);
         }
